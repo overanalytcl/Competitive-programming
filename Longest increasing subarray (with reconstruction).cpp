@@ -1,16 +1,16 @@
 #include <iostream>
+
 uint32_t longIncrArr(uint32_t n, int64_t v[], uint32_t ans[]) {
-	int64_t dp[n], aux[n];
-	uint32_t k = 1;
+    int64_t dp[n], aux[n];
+    uint32_t k = 1;
     dp[k] = v[1];
     aux[k] = k;
     uint32_t i, l, r, mid, pos;
-    for (i = 2; i <= n; ++ i) {
+    for (i = 2; i <= n; ++i) {
         if (v[i] > dp[k]) {
-            dp[++ k] = v[i];
+            dp[++k] = v[i];
             aux[i] = k;
-        }
-        else {
+        } else {
             l = 1;
             r = k;
             pos = k + 1;
@@ -19,8 +19,7 @@ uint32_t longIncrArr(uint32_t n, int64_t v[], uint32_t ans[]) {
                 if (dp[mid] > v[i]) {
                     pos = mid;
                     r = mid - 1;
-                }
-                else
+                } else
                     l = mid + 1;
             }
             dp[pos] = v[i];
@@ -28,24 +27,25 @@ uint32_t longIncrArr(uint32_t n, int64_t v[], uint32_t ans[]) {
         }
     }
     uint32_t j = n;
-    for (i = k; i > 0; -- i) {
+    for (i = k; i > 0; --i) {
         while (aux[j] != i)
-            -- j;
+            --j;
         ans[i] = j;
     }
     return k;
 }
+
 int main() {
-	std :: ios_base :: sync_with_stdio(false);
-	std :: cin.tie(nullptr);
-	uint32_t n, i;
-    std :: cin >> n;
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    uint32_t n, i;
+    std::cin >> n;
     int64_t v[n];
-    for (i = 1; i <= n; ++ i)
-        std :: cin >> v[i];
-	uint32_t ans[n], len = longIncrArr(n, v, ans);
-    std :: cout << len << '\n';
-    for (i = 1; i <= len; ++ i)
-		std :: cout << ans[i] << ' ';
+    for (i = 1; i <= n; ++i)
+        std::cin >> v[i];
+    uint32_t ans[n], len = longIncrArr(n, v, ans);
+    std::cout << len << '\n';
+    for (i = 1; i <= len; ++i)
+        std::cout << ans[i] << ' ';
     return 0;
 }

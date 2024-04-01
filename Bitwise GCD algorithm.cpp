@@ -1,5 +1,7 @@
 #pragma GCC target("abm", "bmi", "bmi2", "popcnt", "lzcnt")
+
 #include <iostream>
+
 uint64_t gcd(uint64_t a, uint64_t b) {
     if (a == 0)
         return b;
@@ -12,7 +14,7 @@ uint64_t gcd(uint64_t a, uint64_t b) {
     do {
         b >>= __builtin_ctz(b);
         if (a > b)
-            std :: swap(a, b);
+            std::swap(a, b);
         b -= a;
     } while (b != 0);
     return (a << shift);
